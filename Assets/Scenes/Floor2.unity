@@ -624,7 +624,8 @@ Prefab:
       propertyPath: m_Name
       value: EntryDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114093956171573522, guid: 3d87644c6779df142980ad2c2ba773ed, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 3d87644c6779df142980ad2c2ba773ed, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1467686442 stripped
