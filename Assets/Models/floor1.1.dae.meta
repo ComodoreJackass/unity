@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 0e46f66a82637574d8b82a27f3937c09
+guid: 04ab55b0dad46fd47837aedefae654c3
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: dungeons_and_flagons_jpg
-    2100002: dungeons_and_flagons3_jpg
-    2100004: No Name
+    2100000: more_rough_wood_8_jpg
+    2100002: dungeons_and_flagons_jpg
+    2100004: dungeons_and_flagons3_jpg
+    2100006: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: floor4
+    4300000: Floor1
   externalObjects: {}
   materials:
     importMaterials: 1

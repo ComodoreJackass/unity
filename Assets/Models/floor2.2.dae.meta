@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-guid: d562b32559d3874459a02193a3636c51
+guid: 3c8bbff2883d6604cb9aa45bd3976da8
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: dungeons_and_flagons_jpg
-    2100002: dungeons_and_flagons3_jpg
-    2100004: No Name
+    2100000: dungeons_and_flagons3_jpg
+    2100002: more_rough_wood_8_jpg
+    2100004: dungeons_and_flagons_jpg
+    2100006: No Name
     2300000: //RootNode
     3300000: //RootNode
     4300000: floor2
@@ -47,8 +48,8 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
