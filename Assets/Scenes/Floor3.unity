@@ -881,7 +881,8 @@ Prefab:
       propertyPath: m_Name
       value: ExitDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114093956171573522, guid: 3d87644c6779df142980ad2c2ba773ed, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 3d87644c6779df142980ad2c2ba773ed, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1991007276 stripped
@@ -889,6 +890,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4614238724620830, guid: 3d87644c6779df142980ad2c2ba773ed,
     type: 2}
   m_PrefabInternal: {fileID: 1991007275}
+--- !u!1 &1991007277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1924628831025660, guid: 3d87644c6779df142980ad2c2ba773ed,
+    type: 2}
+  m_PrefabInternal: {fileID: 1991007275}
+--- !u!114 &1991007278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1991007277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10df70b51e0fdd242a02ef96166cc68d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2117343292
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 
     Vector3 start;
     Vector3 destination;
-   
+
+    public bool freeze = false;
     private bool canMove = true;
     private bool didNotCollide = true;
     private float speed;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("Forward") && canMove)
+        if (Input.GetButtonDown("Forward") && canMove && !freeze)
         {
             //Ponovno se možemo kretati tek kad se završi prvo kretanje
             canMove = false;
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         
         // copy paste od iznad s obrnutim vektorima
-        if (Input.GetButtonDown("Back") && canMove)
+        if (Input.GetButtonDown("Back") && canMove && !freeze)
         {
             canMove = false;
             GetComponent<CameraControl>().enabled = false;

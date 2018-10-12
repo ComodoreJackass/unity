@@ -63,7 +63,7 @@ ModelImporter:
     - serializedVersion: 16
       name: 'Open '
       takeName: Default Take
-      firstFrame: 45
+      firstFrame: 55
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
@@ -85,6 +85,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0
+        functionName: stopMoving
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.032374103
         functionName: toggle
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
@@ -92,8 +100,16 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9848837
+      - time: 0.96689814
         functionName: toggle
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9930233
+        functionName: startMoving
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
           type: 3}
