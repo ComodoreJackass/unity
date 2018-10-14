@@ -5,23 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class ExitDoorScript : MonoBehaviour {
 
+    public Item item;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Press 'E' to open door");
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(name);
-
         if (Input.GetButtonDown("Interact"))
         {
-            if (SceneManager.GetActiveScene().name == "Floor1")
+            if (Inventory.instance.Contains(item))
             {
-                SceneManager.LoadScene("Floor2");
+                Inventory.instance.Remove(item);
+                if (SceneManager.GetActiveScene().name == "Floor1")
+                {
+                    SceneManager.LoadScene("Floor2");
+                }
+                if (SceneManager.GetActiveScene().name == "Floor2")
+                {
+                    SceneManager.LoadScene("Floor3");
+                }
+                if (SceneManager.GetActiveScene().name == "Floor3")
+                {
+                    SceneManager.LoadScene("Floor4");
+                }
             }
-            if (SceneManager.GetActiveScene().name == "Floor2")
+            else
             {
-                SceneManager.LoadScene("Floor3");
-            }
-            if (SceneManager.GetActiveScene().name == "Floor3")
-            {
-                SceneManager.LoadScene("Floor4");
+                Debug.Log("You don't have a key!");
             }
         }
     }

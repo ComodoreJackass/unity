@@ -26,7 +26,8 @@ public class PlayerMovement : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         // Ak smo kresnuli o zid
-        if (collision.collider.tag == "Wall")
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "Door" ||
+            collision.collider.tag == "ExitDoor" || collision.collider.tag == "StaticDoor")
         {
             // uzima Vector3 colidera najbliži točki s koje smo krenuli, sprječava clipping sa zidovima
             destination = transform.position;

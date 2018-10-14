@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114856971739128866}
   m_Layer: 0
   m_Name: door
-  m_TagString: Wall
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,8 +39,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4614238724620830}
-  - component: {fileID: 65885369744554876}
   - component: {fileID: 114093956171573522}
+  - component: {fileID: 65196504118609802}
   m_Layer: 0
   m_Name: Door1
   m_TagString: Door
@@ -134,7 +134,7 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 1abe69fbfd2daf2459362edd99d10da8, type: 3}
---- !u!65 &65885369744554876
+--- !u!65 &65196504118609802
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

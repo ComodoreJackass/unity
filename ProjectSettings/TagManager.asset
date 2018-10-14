@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wall
   - Door
+  - Chest
+  - ExitDoor
+  - StaticDoor
   layers:
   - Default
   - TransparentFX

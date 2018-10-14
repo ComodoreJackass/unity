@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 136100232569814788}
   - component: {fileID: 114825158552577676}
   - component: {fileID: 114022494865230536}
+  - component: {fileID: 114168290012087786}
   - component: {fileID: 54279861160113246}
   m_Layer: 0
   m_Name: Player
@@ -194,6 +195,19 @@ MonoBehaviour:
   controller: {fileID: 0}
   setSpeed: 2.5
   tileSize: 2
+  freeze: 0
+--- !u!114 &114168290012087786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476359214333866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed86cfd3555334385dc3655add415c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorInfront: 0
 --- !u!114 &114825158552577676
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -18,7 +18,7 @@ public class ToggleCollider : MonoBehaviour {
     }
 
     public void stopMoving() {
-        movement.freeze = true;
+        movement.freeze = false;
     }
 
     public void startMoving()
