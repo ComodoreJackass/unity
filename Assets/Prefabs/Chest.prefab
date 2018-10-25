@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4124365066499558}
   - component: {fileID: 95870509554141668}
-  - component: {fileID: 65810686724429900}
   m_Layer: 0
   m_Name: chest
   m_TagString: Wall
@@ -234,18 +233,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: -1, y: 0, z: 0}
---- !u!65 &65810686724429900
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1376023491274254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95870509554141668
 Animator:
   serializedVersion: 3

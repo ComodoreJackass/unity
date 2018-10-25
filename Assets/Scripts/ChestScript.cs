@@ -7,29 +7,24 @@ public class ChestScript : MonoBehaviour {
     public Item item;
     private Animator animator;
 
-    private float yRotation;
-    private float yRotationPlayer;
+    private bool entered;
 
     // Use this for initialization
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        yRotation = transform.rotation.eulerAngles.y+90;
-        if (yRotation == 360f) {
-            yRotation = 0f;
-        }
+        entered = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Chest in range.");
+        Debug.Log("Press 'E' to open chest.");
+        entered = true;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void FixedUpdate()
     {
-        yRotationPlayer = other.transform.GetChild(0).rotation.eulerAngles.y;
-        Debug.Log(yRotation + " " + yRotationPlayer);
-        if (other.tag == "Player" && yRotation == yRotationPlayer)
+        if (Input.GetButtonDown("Interact") && entered)
         {
             animator.SetBool("openChest", true);
             Inventory.instance.Add(item);
@@ -39,7 +34,7 @@ public class ChestScript : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Chest out of range.");
+        entered = false;
     }
 
 }

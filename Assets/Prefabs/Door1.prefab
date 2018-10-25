@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 33145938722938088}
   - component: {fileID: 23412360407795704}
   - component: {fileID: 95361562831367666}
-  - component: {fileID: 64351110588614046}
-  - component: {fileID: 114856971739128866}
   m_Layer: 0
   m_Name: door
   m_TagString: Door
@@ -120,20 +118,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1535365584516342}
   m_Mesh: {fileID: 4300000, guid: 1abe69fbfd2daf2459362edd99d10da8, type: 3}
---- !u!64 &64351110588614046
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535365584516342}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 1abe69fbfd2daf2459362edd99d10da8, type: 3}
 --- !u!65 &65196504118609802
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -175,14 +159,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8606da5cd7d9014d8e34a5a38ed5bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114856971739128866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535365584516342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  waypoint1: {fileID: 0}
+  waypoint2: {fileID: 0}

@@ -9,6 +9,7 @@ TagManager:
   - Chest
   - ExitDoor
   - StaticDoor
+  - Waypoint
   layers:
   - Default
   - TransparentFX

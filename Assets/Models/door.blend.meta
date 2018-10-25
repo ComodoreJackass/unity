@@ -83,39 +83,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: stopMoving
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.032374103
-        functionName: toggle
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.96689814
-        functionName: toggle
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.9930233
-        functionName: startMoving
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 84fc027936cc6cc4db89d78a0ecff699,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

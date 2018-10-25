@@ -38,4 +38,9 @@ public class ExitDoorScript : MonoBehaviour {
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("");
+    }
 }
