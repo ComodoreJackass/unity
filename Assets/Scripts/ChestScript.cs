@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class ChestScript : MonoBehaviour {
 
+    //chest sadrži slot za item
     public Item item;
+    //animacija
     private Animator animator;
 
     private bool entered;
-
-    // Use this for initialization
+    private bool pickedUp;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         entered = false;
+        pickedUp = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,10 +27,13 @@ public class ChestScript : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (Input.GetButtonDown("Interact") && entered)
+        if (Input.GetButtonDown("Interact") && entered && !pickedUp)
         {
             animator.SetBool("openChest", true);
+            //Rokni item u inventory
             Inventory.instance.Add(item);
+            //ubijanje daljnje interakcije sa škrinjom
+            pickedUp = true;
             Debug.Log("Picked up " + item.name);
         }
     }

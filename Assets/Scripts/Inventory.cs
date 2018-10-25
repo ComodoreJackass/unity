@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     #region Singleton
-
+    //Instancira sam sebe i održava se na životu kroz sve scene
     public static Inventory instance;
 
     private void Awake()
@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour {
     }
 
     #endregion
+
+    // popalio odavde https://www.youtube.com/watch?v=YLhj7SfaxSE
 
     public List<Item> items = new List<Item>();
 

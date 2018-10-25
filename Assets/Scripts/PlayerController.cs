@@ -2,18 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//za hodanje i rotiranje
 public class PlayerController : MonoBehaviour {
 
+    //trenutna točka na kojoj se lik nalazi
     public GameObject currentWaypoint;
+
+    //predstavljat će točku na koju se možemo pomaknuti sa trenutne pozicije s obzirom na orijentaciju
     private GameObject targetWaypoint;
 
+    //služe za spriječavanje istovremenog hodanja i rotiranja
     private bool executingMovement;
     private bool executingRotate;
+
+    //za smoothing hodanja, da se samo ne warpamo
     private float pathTraversed;
+
+    //trenutna rotacija
     private float rotation;
+
+    //za koliko stupnjeva se rotiramo
     private int degRotation = 90;
 
-    public float speed = 2.5f;
+    // panzer vor means panzer vor
+    public float speed = 2.5f;  
+    // utječe na brzinu rotacije
     public float inTime = 0.6f;
 
     private void Start()
@@ -25,16 +38,21 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        //stalno provjeravamo u kojem smo smjeru zarotirani
         rotation = transform.eulerAngles.y;
 
         if (Input.GetButtonDown("Forward") && !executingRotate && !executingMovement) {
+            //bool FindTargetu služi samo da zna da li da traži waypoint ispred ili iza lika
             targetWaypoint = FindTarget(true);
+            //resetiranje varijable za smoothing pokreta
             pathTraversed = 0f;
+            //ako postoji targetWaypoint, započni kretanje prema njemu
             if (targetWaypoint != null) {
                 executingMovement = true;
             }
         }
 
+        //see above
         if (Input.GetButtonDown("Back") && !executingRotate && !executingMovement)
         {
             targetWaypoint = FindTarget(false);
@@ -55,16 +73,16 @@ public class PlayerController : MonoBehaviour {
             // transform.position je pozicija lika
             transform.position = Vector3.Lerp(currentWaypoint.transform.position, targetWaypoint.transform.position, pathTraversed);
             
-            // Ako smo se pomakli na destinaciju, omogući unos novog kretanja
+            // Ako smo se pomakli na destinaciju, target postaje current, omogući unos novog kretanja
             // i omogući rotaciju kamere
             if (transform.position == targetWaypoint.transform.position)
             {
-                //Debug.Log(currentWaypoint.name + " " + targetWaypoint.name);
                 currentWaypoint = targetWaypoint;
                 executingMovement = false;            
             }
         }
 
+        //rotacija je malo autistična
         if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement)
         {
             executingRotate = true;
@@ -82,6 +100,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private GameObject FindTarget(bool forward) {
+        // po rotaciji uzima iz current waypointa link na idući waypoint te ga vraća u target waypoint
         if (rotation == 90)
         {
             if (forward)

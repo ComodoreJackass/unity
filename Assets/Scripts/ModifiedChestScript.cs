@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ModifiedChestScript : MonoBehaviour {
 
+
+    
+
+    //Nothing of value here, despacito chest kontroler 
+
+
+    
     private Animator animator;
     private new AudioSource audio;
     private bool started = false;
@@ -32,7 +39,7 @@ public class ModifiedChestScript : MonoBehaviour {
             animator.SetBool("openChest", true);
             audio.Play(0);
             started = true;
-            Debug.Log("Alexa this is so sad...");
+            Debug.Log("This is so sad Alexa...");
         }
     }
 

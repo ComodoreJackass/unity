@@ -4,76 +4,14 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour {
 
-    #region old
-    /*private Animator animator;
-
-    private float yRotation;
-    private float yRotationOposite;
-    private float yRotationPlayer;
-
-    // Use this for initialization
-    void Start () {
-        animator = GetComponentInChildren<Animator>();
-        yRotation = transform.rotation.eulerAngles.y;
-        yRotationOposite = yRotation + 180f;
-        if (yRotation == 360f)
-        {
-            yRotation = 0f;
-        }
-        if (yRotationOposite == 360f) {
-            yRotationOposite = 0f;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        GiveMePlayerRotation(other);
-        Debug.Log(yRotation + " " + yRotationOposite + " " + yRotationPlayer);
-        if (other.tag == "Player" && (yRotation == yRotationPlayer || yRotationOposite == yRotationPlayer))
-        {
-            animator.SetBool("close", false);
-            animator.SetBool("open", true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("exited");
-        if (other.tag == "Player")
-        {
-            animator.SetBool("open", false);
-            animator.SetBool("close", true);
-        }
-    }
-
-    private void GiveMePlayerRotation(Collider other) {
-        yRotationPlayer = other.transform.GetChild(0).rotation.eulerAngles.y;
-
-        if (yRotationPlayer > 45f && yRotationPlayer < 135f)
-        {
-            yRotationPlayer = 90f;
-        }
-        else if (yRotationPlayer > 135f && yRotationPlayer < 225f)
-        {
-            yRotationPlayer = 180f;
-        }
-        else if (yRotationPlayer > 225f && yRotationPlayer < 315f)
-        {
-            yRotationPlayer = 270f;
-        }
-        else
-        {
-            yRotationPlayer = 0f;
-        }
-    }*/
-    #endregion
-
-
     public GameObject waypoint1;
     public GameObject waypoint2;
 
+    //kontroler za animaciju
     private Animator animator;
+    //bool koji postane true kad smo u poziciji u kojoj možemo otvoriti vrata
     private bool entered;
+    //služi za pronalaženje osi na kojoj su waypoint ispred i waypoint iza vrata povezani
     private string direction;
 
     void Start()
@@ -81,6 +19,7 @@ public class DoorScript : MonoBehaviour {
         animator = GetComponentInChildren<Animator>();
         entered = false;
 
+        //pronalaženje poveznice među waypointovima između kojih su vrata
         if (waypoint1.GetComponent<Waypoint>().left == waypoint2) { direction = "left"; }
         else if (waypoint1.GetComponent<Waypoint>().right == waypoint2) { direction = "right"; }
         else if (waypoint1.GetComponent<Waypoint>().up == waypoint2) { direction = "up"; }
@@ -92,6 +31,7 @@ public class DoorScript : MonoBehaviour {
         Debug.Log("Press 'E' to open door");
         entered = true;
 
+        //kad uđemo u trigger od vrata gasi se link između waypointova, to nam onemogućuje prolazak kroz zatvorena vrata
         if (direction == "left") {
             waypoint1.GetComponent<Waypoint>().left = null;
             waypoint2.GetComponent<Waypoint>().right = null;
@@ -110,14 +50,17 @@ public class DoorScript : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        //Ako smo u triggeru i neko rokne "E"
         if (Input.GetButtonDown("Interact") && entered)
         {
             Debug.Log("");
+            //pokretanje animacije za otvaranje vrata
             animator.SetBool("close", false);
             animator.SetBool("open", true);
 
+            //paljenje poveznice među waypointovima, tj sad možemo proći kroz vrata
             if (direction == "left")
             {
                 waypoint1.GetComponent<Waypoint>().left = waypoint2;
@@ -143,6 +86,7 @@ public class DoorScript : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
+        // kad se maknemo iz triggera, zatvori vrata
         animator.SetBool("close", true);
         animator.SetBool("open", false);
         entered = false;

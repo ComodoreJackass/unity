@@ -5,6 +5,8 @@ using UnityEditor;
 
 public class AdditionalTools {
 
+    // Alat za povezivanje waypointova na mapi, dalje nepotreban, ponovno pokretanje će samo omogućiti hodanje kroz neke zidove
+
     [MenuItem("Proizvodno Postrojenje/ Connect the Waypoints")]
     public static void ConnectTheWaypoints()
     {

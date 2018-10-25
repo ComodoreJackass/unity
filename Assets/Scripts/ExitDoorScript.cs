@@ -14,6 +14,7 @@ public class ExitDoorScript : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
+        //Ako imamo ključ u inventoryu, uništi ga i prebaci nas na sljedeći level
         if (Input.GetButtonDown("Interact"))
         {
             if (Inventory.instance.Contains(item))

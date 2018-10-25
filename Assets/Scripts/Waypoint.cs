@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour {
 
+    
+    //waypoint je struktura koja sadrži poveznice na strukture oko nje
     public GameObject up;
     public GameObject down;
     public GameObject right;
     public GameObject left;
 
+
+    //crta linije između povezanih waypointova
     private void OnDrawGizmos()
     {
         if (up != null) {
