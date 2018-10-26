@@ -25,7 +25,7 @@ public class ChestScript : MonoBehaviour {
         entered = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetButtonDown("Interact") && entered && !pickedUp)
         {
