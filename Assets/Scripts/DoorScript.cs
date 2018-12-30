@@ -53,7 +53,7 @@ public class DoorScript : MonoBehaviour {
     private void Update()
     {
         //Ako smo u triggeru i neko rokne "E"
-        if (Input.GetButtonDown("Interact") && entered)
+        if (Input.GetButtonDown("Interact") && entered && !EncounterController.instance.AreWeFighting())
         {
             Debug.Log("");
             //pokretanje animacije za otvaranje vrata

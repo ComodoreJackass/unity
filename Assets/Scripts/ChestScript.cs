@@ -27,7 +27,7 @@ public class ChestScript : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && entered && !pickedUp)
+        if (Input.GetButtonDown("Interact") && entered && !pickedUp && !EncounterController.instance.AreWeFighting())
         {
             animator.SetBool("openChest", true);
             //Rokni item u inventory

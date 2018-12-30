@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     private bool executingMovement;
     private bool executingRotate;
 
+    private bool fightingInProgress;
+
     //za smoothing hodanja, da se samo ne warpamo
     private float pathTraversed;
 
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour {
     {
         executingRotate = false;
         executingMovement = false;
+        fightingInProgress = false;
         rotation = transform.eulerAngles.y;
     }
 
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour {
         //stalno provjeravamo u kojem smo smjeru zarotirani
         rotation = transform.eulerAngles.y;
 
-        if (Input.GetButtonDown("Forward") && !executingRotate && !executingMovement) {
+        if (Input.GetButtonDown("Forward") && !executingRotate && !executingMovement && !fightingInProgress) {
             //bool FindTargetu služi samo da zna da li da traži waypoint ispred ili iza lika
             targetWaypoint = FindTarget(true);
             //resetiranje varijable za smoothing pokreta
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //see above
-        if (Input.GetButtonDown("Back") && !executingRotate && !executingMovement)
+        if (Input.GetButtonDown("Back") && !executingRotate && !executingMovement && !fightingInProgress)
         {
             targetWaypoint = FindTarget(false);
             pathTraversed = 0f;
@@ -78,19 +81,25 @@ public class PlayerController : MonoBehaviour {
             if (transform.position == targetWaypoint.transform.position)
             {
                 currentWaypoint = targetWaypoint;
-                executingMovement = false;            
+                executingMovement = false;
+                fightingInProgress = EncounterController.instance.RollForBattle();
             }
         }
 
-        //rotacija je malo autistična
-        if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement)
+        //hope this works
+        if (fightingInProgress) {
+            fightingInProgress = EncounterController.instance.AreWeFighting();
+        }
+
+        //rotacija
+        if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement && !fightingInProgress)
         {
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * degRotation, inTime, returnValue =>
             { executingRotate = returnValue; }));
         }
 
-        if (Input.GetButtonDown("Left") && !executingRotate && !executingMovement)
+        if (Input.GetButtonDown("Left") && !executingRotate && !executingMovement && !fightingInProgress)
         {
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * -degRotation, inTime, returnValue =>
