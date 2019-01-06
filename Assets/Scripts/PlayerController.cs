@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
     //za koliko stupnjeva se rotiramo
     private int degRotation = 90;
 
-    // panzer vor means panzer vor
     public float speed = 2.5f;  
     // utječe na brzinu rotacije
     public float inTime = 0.6f;
@@ -44,7 +43,7 @@ public class PlayerController : MonoBehaviour {
         //stalno provjeravamo u kojem smo smjeru zarotirani
         rotation = transform.eulerAngles.y;
 
-        if (Input.GetButtonDown("Forward") && !executingRotate && !executingMovement && !fightingInProgress) {
+        if (Input.GetButtonDown("Forward") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf) {
             //bool FindTargetu služi samo da zna da li da traži waypoint ispred ili iza lika
             targetWaypoint = FindTarget(true);
             //resetiranje varijable za smoothing pokreta
@@ -56,7 +55,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //see above
-        if (Input.GetButtonDown("Back") && !executingRotate && !executingMovement && !fightingInProgress)
+        if (Input.GetButtonDown("Back") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf)
         {
             targetWaypoint = FindTarget(false);
             pathTraversed = 0f;
@@ -92,14 +91,14 @@ public class PlayerController : MonoBehaviour {
         }
 
         //rotacija
-        if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement && !fightingInProgress)
+        if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf)
         {
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * degRotation, inTime, returnValue =>
             { executingRotate = returnValue; }));
         }
 
-        if (Input.GetButtonDown("Left") && !executingRotate && !executingMovement && !fightingInProgress)
+        if (Input.GetButtonDown("Left") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf)
         {
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * -degRotation, inTime, returnValue =>
