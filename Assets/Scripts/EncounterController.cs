@@ -24,6 +24,8 @@ public class EncounterController : MonoBehaviour {
     }
     #endregion
 
+    public AudioSource audioSource;
+
     public GameObject battleScreen;
     public Enemy[] enemySprites;
 
@@ -113,6 +115,7 @@ public class EncounterController : MonoBehaviour {
     public void EnemyAction() {
         if (enemy.hp > 1)
         {
+            audioSource.Play();
             PlayerStats.instance.SetPlayerHp(-5);
             textLog.text += "\n" + enemy.enemyName + " hits you for 5 DMG";
             playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
@@ -120,22 +123,35 @@ public class EncounterController : MonoBehaviour {
     }
 
 
+    IEnumerator battleFlow() {
+        //vrijeme izmedu naseg i neprijateljevog poteza
+        attackButton.interactable = false;
+        defendButton.interactable = false;
+        fleeButton.interactable = false;
+        yield return new WaitForSeconds(1.0f);
+        EnemyAction();
+        attackButton.interactable = true;
+        defendButton.interactable = true;
+        fleeButton.interactable = true;
+    }
+
     //Player actions
     public void ActionAttack()
     {
         enemy.hp -= 5;
 
+        audioSource.Play();
         textLog.text = "You hit " + enemy.enemyName + " for 5 DMG.";
         enemyHP.text = enemy.enemyName + " hp: " + enemy.hp;
         StatusCheck();
-        EnemyAction();
+        StartCoroutine(battleFlow());
         StatusCheck();
     }
 
     public void ActionDefend()
     {
         textLog.text = "You attempt to defend.";
-        EnemyAction();
+        StartCoroutine(battleFlow());
         StatusCheck();
     }
 
