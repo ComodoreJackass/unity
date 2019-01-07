@@ -5,6 +5,8 @@ using UnityEngine;
 //za hodanje i rotiranje
 public class PlayerController : MonoBehaviour {
 
+    private AudioSource audioSource;
+
     //trenutna točka na kojoj se lik nalazi
     public GameObject currentWaypoint;
 
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour {
         executingMovement = false;
         fightingInProgress = false;
         rotation = transform.eulerAngles.y;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.pitch = 2;
     }
 
     private void Update()
@@ -51,6 +55,8 @@ public class PlayerController : MonoBehaviour {
             //ako postoji targetWaypoint, započni kretanje prema njemu
             if (targetWaypoint != null) {
                 executingMovement = true;
+                //audio
+                StartCoroutine(PlayFootsteps());
             }
         }
 
@@ -62,6 +68,8 @@ public class PlayerController : MonoBehaviour {
             if (targetWaypoint != null)
             {
                 executingMovement = true;
+                //audio
+                StartCoroutine(PlayFootsteps());
             }
         }
 
@@ -93,6 +101,7 @@ public class PlayerController : MonoBehaviour {
         //rotacija
         if (Input.GetButtonDown("Right") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf)
         {
+            StartCoroutine(PlayFootsteps());
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * degRotation, inTime, returnValue =>
             { executingRotate = returnValue; }));
@@ -100,6 +109,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Left") && !executingRotate && !executingMovement && !fightingInProgress && !PlayerStats.instance.enterName.activeSelf)
         {
+            StartCoroutine(PlayFootsteps());
             executingRotate = true;
             StartCoroutine(RotateMe(Vector3.up * -degRotation, inTime, returnValue =>
             { executingRotate = returnValue; }));
@@ -156,6 +166,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+
+    IEnumerator PlayFootsteps() {
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+        audioSource.Play();
+    }
 
     //korutina https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html
     IEnumerator RotateMe(Vector3 byAngles, float inTime, System.Action<bool> callback)

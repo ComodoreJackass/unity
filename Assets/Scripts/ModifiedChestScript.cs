@@ -12,7 +12,7 @@ public class ModifiedChestScript : MonoBehaviour {
 
     
     private Animator animator;
-    private new AudioSource audio;
+    private AudioSource audioSource;
     private bool started = false;
     //s ovom forom skrinje i vrata ce se otvarati samo ako ih direktno gledamo
     private float yRotation;
@@ -22,7 +22,7 @@ public class ModifiedChestScript : MonoBehaviour {
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         yRotation = transform.rotation.eulerAngles.y + 90;
     }
 
@@ -37,7 +37,7 @@ public class ModifiedChestScript : MonoBehaviour {
         if (other.tag == "Player" && yRotation == yRotationPlayer && !started)
         {
             animator.SetBool("openChest", true);
-            audio.Play(0);
+            audioSource.Play(0);
             started = true;
             Debug.Log("This is so sad Alexa...");
         }

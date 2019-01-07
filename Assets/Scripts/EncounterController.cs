@@ -59,7 +59,7 @@ public class EncounterController : MonoBehaviour {
 
     public bool RollForBattle() {
 
-        if (Random.Range(1, 100) < 20)
+        if (Random.Range(1, 100) < 15)
         {
             Debug.Log("Battle!");
             fightInProgress = true;
@@ -70,6 +70,8 @@ public class EncounterController : MonoBehaviour {
 
     public void InitiateBattle() {
         int roll = Random.Range(0, enemySprites.Length);
+
+        BackgroundMusic.instance.playBatlle();
 
         enemy.enemyName = enemySprites[roll].enemyName;
         enemy.enemySprite = enemySprites[roll].enemySprite;
@@ -149,6 +151,7 @@ public class EncounterController : MonoBehaviour {
         }
         fightInProgress = false;
         battleScreen.SetActive(false);
+        BackgroundMusic.instance.playTheme();
     }
 
 

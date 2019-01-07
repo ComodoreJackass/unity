@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 public class ExitDoorScript : MonoBehaviour {
 
     public Item item;
+    private AudioSource audioSource;
+    public AudioClip locked;
+    public AudioClip unlocked;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +27,8 @@ public class ExitDoorScript : MonoBehaviour {
         {
             if (Inventory.instance.Contains(item))
             {
+                audioSource.clip = unlocked;
+                audioSource.Play();
                 Inventory.instance.Remove(item);
                 if (SceneManager.GetActiveScene().name == "Floor1")
                 {
@@ -35,6 +45,8 @@ public class ExitDoorScript : MonoBehaviour {
             }
             else
             {
+                audioSource.clip = locked;
+                audioSource.Play();
                 Debug.Log("You don't have a key!");
             }
         }

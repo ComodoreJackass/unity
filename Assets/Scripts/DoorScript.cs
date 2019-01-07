@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour {
 
+    private AudioSource audioSource;
+
     public GameObject waypoint1;
     public GameObject waypoint2;
 
@@ -14,8 +16,13 @@ public class DoorScript : MonoBehaviour {
     //služi za pronalaženje osi na kojoj su waypoint ispred i waypoint iza vrata povezani
     private string direction;
 
+    private bool doorOpened;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        doorOpened = false;
+
         animator = GetComponentInChildren<Animator>();
         entered = false;
 
@@ -55,7 +62,12 @@ public class DoorScript : MonoBehaviour {
         //Ako smo u triggeru i neko rokne "E"
         if (Input.GetButtonDown("Interact") && entered && !EncounterController.instance.AreWeFighting())
         {
-            Debug.Log("");
+            doorOpened = true;
+            //audio
+            audioSource.time = 1.5f;
+            audioSource.Play();
+            audioSource.SetScheduledEndTime(AudioSettings.dspTime + (2.5f-1.5f));
+
             //pokretanje animacije za otvaranje vrata
             animator.SetBool("close", false);
             animator.SetBool("open", true);
@@ -86,6 +98,15 @@ public class DoorScript : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
+        if (doorOpened)
+        {
+            //audio
+            audioSource.time = 5.0f;
+            audioSource.PlayDelayed(0.3f);
+            audioSource.SetScheduledEndTime(AudioSettings.dspTime + (6.0f - 5.0f));
+            doorOpened = false;
+        }
+
         // kad se maknemo iz triggera, zatvori vrata
         animator.SetBool("close", true);
         animator.SetBool("open", false);

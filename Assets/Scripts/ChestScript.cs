@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChestScript : MonoBehaviour {
 
+    private AudioSource audioSource;
+
     //chest sadrži slot za item
     public Item item;
     //animacija
@@ -17,6 +19,7 @@ public class ChestScript : MonoBehaviour {
         animator = GetComponentInChildren<Animator>();
         entered = false;
         pickedUp = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +32,11 @@ public class ChestScript : MonoBehaviour {
     {
         if (Input.GetButtonDown("Interact") && entered && !pickedUp && !EncounterController.instance.AreWeFighting())
         {
+            //audio
+            audioSource.time = 0.5f;
+            audioSource.Play();
+            audioSource.SetScheduledEndTime(AudioSettings.dspTime + (1.5f - 0.5f));
+
             animator.SetBool("openChest", true);
             //Rokni item u inventory
             Inventory.instance.Add(item);
