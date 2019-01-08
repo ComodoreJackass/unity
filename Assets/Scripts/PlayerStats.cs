@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour {
 
     private void Start()
     {
-        playerHp = 50;
+        playerHp = 20;
         playerName = "";
     }
 
@@ -63,10 +63,10 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public void PlayerIsDead() {
-        Destroy(Inventory.instance);
-        Destroy(EncounterController.instance);
-        Destroy(PersistCanvas.instance);
-        Destroy(instance);
+        Destroy(Inventory.instance.gameObject);
+        Destroy(EncounterController.instance.gameObject);
+        Destroy(PersistCanvas.instance.gameObject);
+        Destroy(instance.gameObject);
         SceneManager.LoadScene("Menu");
     }
 

@@ -113,13 +113,14 @@ public class EncounterController : MonoBehaviour {
     }
 
     public void EnemyAction() {
-        if (enemy.hp > 1)
+        if (enemy.hp > 1 && PlayerStats.instance.GetPlayerHp()>1)
         {
             audioSource.Play();
             PlayerStats.instance.SetPlayerHp(-5);
             textLog.text += "\n" + enemy.enemyName + " hits you for 5 DMG";
             playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
         }
+        StatusCheck();
     }
 
 
