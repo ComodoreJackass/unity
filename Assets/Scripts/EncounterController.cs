@@ -75,6 +75,10 @@ public class EncounterController : MonoBehaviour {
         return fightInProgress;
     }
 
+    public bool checkForFinalBoss() {
+        return finalBoss;
+    }
+
     public void InitiateFinalBattle() {
         fightInProgress = true;
         finalBoss = true;

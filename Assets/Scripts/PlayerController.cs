@@ -89,7 +89,10 @@ public class PlayerController : MonoBehaviour {
             {
                 currentWaypoint = targetWaypoint;
                 executingMovement = false;
-                fightingInProgress = EncounterController.instance.RollForBattle();
+                if (!EncounterController.instance.checkForFinalBoss())
+                {
+                    fightingInProgress = EncounterController.instance.RollForBattle();
+                }
             }
         }
 
