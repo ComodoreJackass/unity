@@ -13,4 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Mimic
   hp: 15
+  strength: 15
+  endurance: 15
+  stamina: 50
+  staminaMax: 50
+  defence: 0
   enemySprite: {fileID: 21300000, guid: 4aa10be912ece324da412efa3779bdc3, type: 3}

@@ -42,6 +42,7 @@ public class ChestScript : MonoBehaviour {
             Inventory.instance.Add(item);
             //ubijanje daljnje interakcije sa škrinjom
             pickedUp = true;
+            PlayerStats.instance.toggleKeyFoundMessage(true);
             Debug.Log("Picked up " + item.name);
         }
     }

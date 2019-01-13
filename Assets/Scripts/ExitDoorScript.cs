@@ -13,6 +13,7 @@ public class ExitDoorScript : MonoBehaviour {
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        PlayerStats.instance.toggleLockedDoorMessage(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,11 +43,13 @@ public class ExitDoorScript : MonoBehaviour {
                 {
                     SceneManager.LoadScene("Floor4");
                 }
+                PlayerStats.instance.toggleLevelUp(true);
             }
             else
             {
                 audioSource.clip = locked;
                 audioSource.Play();
+                PlayerStats.instance.toggleLockedDoorMessage(true);
                 Debug.Log("You don't have a key!");
             }
         }
@@ -55,5 +58,11 @@ public class ExitDoorScript : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("");
+    }
+
+    public void confirmDoor()
+    {
+        PlayerStats.instance.toggleLockedDoorMessage(false);
+        Debug.Log("STISNEM CONTINUE!");
     }
 }

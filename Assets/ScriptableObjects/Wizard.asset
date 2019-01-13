@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6940d2b40a281c4c904eb872be9629c, type: 3}
-  m_Name: Earth King
+  m_Name: Wizard
   m_EditorClassIdentifier: 
-  enemyName: Earth King
-  hp: 15
-  strength: 13
-  endurance: 15
-  stamina: 150
-  staminaMax: 150
-  defence: 8
-  enemySprite: {fileID: 21300000, guid: e2b5acaf894155045bd186a5460d058e, type: 3}
+  enemyName: Wizard
+  hp: 20
+  strength: 20
+  endurance: 20
+  stamina: 160
+  staminaMax: 160
+  defence: 9
+  enemySprite: {fileID: 21300000, guid: e70e7815c9ef7fb4aaa924292b5300e1, type: 3}

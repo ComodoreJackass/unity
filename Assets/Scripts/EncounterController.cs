@@ -28,8 +28,12 @@ public class EncounterController : MonoBehaviour {
 
     public GameObject battleScreen;
     public Enemy[] enemySprites;
+    public Enemy boss;
+
+    public GameObject victoryScreen;
 
     private bool fightInProgress;
+    private bool finalBoss;
 
     private Image displayEnemy;
     private Text textLog;
@@ -45,6 +49,7 @@ public class EncounterController : MonoBehaviour {
     private void Start()
     {
         fightInProgress = false;
+        finalBoss = false;
         displayEnemy = battleScreen.transform.Find("DisplayEnemy").GetComponent<Image>();
         displayEnemy.preserveAspect = true;
         textLog = battleScreen.transform.Find("TextLog").GetComponent<Text>();
@@ -61,13 +66,41 @@ public class EncounterController : MonoBehaviour {
 
     public bool RollForBattle() {
 
-        if (Random.Range(1, 100) < 15)
+        if (Random.Range(1, 100) < 5)
         {
             Debug.Log("Battle!");
             fightInProgress = true;
             InitiateBattle();
         }
         return fightInProgress;
+    }
+
+    public void InitiateFinalBattle() {
+        fightInProgress = true;
+        finalBoss = true;
+
+        BackgroundMusic.instance.playBatlle();
+
+        enemy.enemyName = boss.enemyName;
+        enemy.enemySprite = boss.enemySprite;
+        enemy.hp = boss.hp;
+        enemy.strength = boss.strength;
+        enemy.stamina = boss.stamina;
+        enemy.staminaMax = boss.staminaMax;
+        enemy.defence = boss.defence;
+        enemy.endurance = boss.endurance;
+
+        displayEnemy.sprite = enemy.enemySprite;
+        playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
+        enemyHP.text = enemy.enemyName + " hp: " + enemy.hp;
+        textLog.text = enemy.enemyName + " appears before you!\n";
+
+        attackButton.gameObject.SetActive(true);
+        defendButton.gameObject.SetActive(true);
+        fleeButton.gameObject.SetActive(true);
+        continueButton.gameObject.SetActive(false);
+
+        battleScreen.SetActive(true);
     }
 
     public void InitiateBattle() {
@@ -78,6 +111,11 @@ public class EncounterController : MonoBehaviour {
         enemy.enemyName = enemySprites[roll].enemyName;
         enemy.enemySprite = enemySprites[roll].enemySprite;
         enemy.hp = enemySprites[roll].hp;
+        enemy.strength = enemySprites[roll].strength;
+        enemy.stamina = enemySprites[roll].stamina;
+        enemy.staminaMax = enemySprites[roll].staminaMax;
+        enemy.defence = enemySprites[roll].defence;
+        enemy.endurance = enemySprites[roll].endurance;
 
         displayEnemy.sprite = enemy.enemySprite;
         playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
@@ -113,12 +151,41 @@ public class EncounterController : MonoBehaviour {
     }
 
     public void EnemyAction() {
-        if (enemy.hp > 1 && PlayerStats.instance.GetPlayerHp()>1)
+        if (enemy.hp > 1 && PlayerStats.instance.GetPlayerHp()>1 && enemy.stamina > 10)
         {
-            audioSource.Play();
-            PlayerStats.instance.SetPlayerHp(-5);
-            textLog.text += "\n" + enemy.enemyName + " hits you for 5 DMG";
-            playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
+            if (Random.Range(1, 100) < (float)((1.2 * enemy.stamina / enemy.staminaMax) * 100))
+            {
+                audioSource.Play();
+                Debug.Log("exhaustion: " + ((double)enemy.stamina / enemy.staminaMax));
+                Debug.Log("Str:" + enemy.strength);
+                Debug.Log("PlDef: " + PlayerStats.instance.defStat);
+                int damage = (int)(enemy.strength * ((double)enemy.stamina / enemy.staminaMax)) - PlayerStats.instance.defStat;
+                if(damage<0)
+                {
+                    damage = 0;
+                }
+                PlayerStats.instance.SetPlayerHp( -damage);
+                textLog.text += "\n" + enemy.enemyName + " hits you for " + damage + " DMG";
+                if(PlayerStats.instance.GetPlayerHp() < 0)
+                {
+                    playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: 0";
+                }
+                else
+                {
+                    playerHP.text = PlayerStats.instance.GetPlayerName() + "s hp: " + PlayerStats.instance.GetPlayerHp().ToString();
+                }
+                
+                enemy.stamina -= 10;
+            }
+            else
+            {
+                textLog.text += "\n" + enemy.enemyName + " missed";
+            }
+        }
+        else
+        {
+            textLog.text += "\n" + enemy.enemyName + " decides to rest for a round";
+            enemy.stamina += 10; 
         }
         StatusCheck();
     }
@@ -139,19 +206,64 @@ public class EncounterController : MonoBehaviour {
     //Player actions
     public void ActionAttack()
     {
-        enemy.hp -= 5;
+        double hitChance = (double)((120 * PlayerStats.instance.currentStamina / PlayerStats.instance.staStat));
+        Debug.Log(hitChance);
+        if (Random.Range(1, 100) < hitChance)
+        {
+            int damage = (int)((PlayerStats.instance.strStat * PlayerStats.instance.currentStamina / PlayerStats.instance.staStat )- enemy.defence);
+            enemy.hp -= damage;
 
-        audioSource.Play();
-        textLog.text = "You hit " + enemy.enemyName + " for 5 DMG.";
-        enemyHP.text = enemy.enemyName + " hp: " + enemy.hp;
+            audioSource.Play();
+            textLog.text = "You hit " + enemy.enemyName + " for " + damage + " DMG.";
+            if(enemy.hp < 0)
+            {
+                enemyHP.text = enemy.enemyName + " hp: 0";
+            }
+            else
+            {
+                enemyHP.text = enemy.enemyName + " hp: " + enemy.hp;
+            }
+            
+            if (PlayerStats.instance.currentStamina < 10)
+            {
+                textLog.text += "\n" + "You are exhausted. Defend!!!";
+                attackButton.interactable = false;
+            }
+        }
+        else
+        {
+            textLog.text += "You missed";
+        }
+
         StatusCheck();
         StartCoroutine(battleFlow());
         StatusCheck();
     }
-
+    public void rest()
+    {
+        int maxHp = PlayerStats.instance.endStat;
+        int currentHp = PlayerStats.instance.GetPlayerHp();
+        int heal = (int)(PlayerStats.instance.endStat * 0.1);
+        bool nearMax = false;
+        if (PlayerStats.instance.GetPlayerHp() + (int)(PlayerStats.instance.endStat * 0.1) >= PlayerStats.instance.endStat)
+        {
+            nearMax = true;
+        }
+        if (nearMax)
+        {
+            PlayerStats.instance.SetPlayerHp(maxHp - currentHp);
+        }
+        else
+        {
+            PlayerStats.instance.SetPlayerHp(heal);
+        }
+        PlayerStats.instance.currentStamina = PlayerStats.instance.staStat;
+        attackButton.interactable = true;
+    }
     public void ActionDefend()
     {
-        textLog.text = "You attempt to defend.";
+        textLog.text = "You rest and defend.";
+        rest();
         StartCoroutine(battleFlow());
         StatusCheck();
     }
@@ -165,10 +277,23 @@ public class EncounterController : MonoBehaviour {
     public void ActionContinue() {
         if (PlayerStats.instance.GetPlayerHp() < 1) {
             PlayerStats.instance.PlayerIsDead();
+            return;
         }
         fightInProgress = false;
         battleScreen.SetActive(false);
         BackgroundMusic.instance.playTheme();
+        if (finalBoss)
+        {
+            victoryScreen.SetActive(true);
+            Debug.Log("Wizard defeated");
+        }
+        else {
+
+        }
+    }
+
+    public void ActionFinishGame() {
+        PlayerStats.instance.PlayerIsDead();
     }
 
 

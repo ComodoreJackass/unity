@@ -13,4 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Behemoth
   hp: 20
+  strength: 21
+  endurance: 20
+  stamina: 160
+  staminaMax: 160
+  defence: 2
   enemySprite: {fileID: 21300000, guid: 92804eccfa133c740aec5b6f543ed8f5, type: 3}

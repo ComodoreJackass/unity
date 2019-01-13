@@ -13,4 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Wisp
   hp: 10
+  strength: 11
+  endurance: 10
+  stamina: 200
+  staminaMax: 200
+  defence: 3
   enemySprite: {fileID: 21300000, guid: 550c81d96fbf6334aaf554bfa698944b, type: 3}

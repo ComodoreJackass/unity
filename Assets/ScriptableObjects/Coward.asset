@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Name: Coward
   m_EditorClassIdentifier: 
   enemyName: Coward
-  hp: 5
+  hp: 35
+  strength: 8
+  endurance: 5
+  stamina: 20
+  staminaMax: 20
+  defence: -3
   enemySprite: {fileID: 21300000, guid: d4df6a47ae4ad9543a4affd0601223af, type: 3}
